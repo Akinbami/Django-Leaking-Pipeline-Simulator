@@ -1,0 +1,161 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+    <!-- ============================================================== -->
+    <!-- End Topbar header -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Left Sidebar - style you can find in sidebar.scss  -->
+    <!-- ============================================================== -->
+    {% include 'sidebar.html' %}
+    <!-- ============================================================== -->
+    <!-- End Left Sidebar - style you can find in sidebar.scss  -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Page wrapper  -->
+    <!-- ============================================================== -->
+    <div class="page-wrapper">
+        <!-- ============================================================== -->
+        <!-- Container fluid  -->
+        <!-- ============================================================== -->
+        <div class="container-fluid">
+            <!-- ============================================================== -->
+            <!-- Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <div class="row page-titles">
+                <div class="col-md-5 col-8 align-self-center">
+                    <h3 class="text-themecolor">Pipeline Detail</h3>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+                        <li class="breadcrumb-item active">Dashboard</li>
+                    </ol>
+                </div>
+                <div class="col-md-7 col-4 align-self-center">
+                    <a href="{% url 'pipelines:create' %}" class="btn waves-effect waves-light btn-primary pull-right hidden-sm-down">Install New Pipeline</a>
+                </div>
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- Start Page Content -->
+            <!-- ============================================================== -->
+            <div class="row">
+                <!-- Column -->
+                <div class="col-lg-4 col-xlg-3 col-md-5">
+                    <div class="card">
+                        <div class="card-block">
+                            <center class="m-t-30"> <img src="{{instance.image.url}}" class="img-circle" width="150" />
+                                <h4 class="card-title m-t-10">{{ instance.name }}</h4>
+                                <h6 class="card-subtitle">Accoubts Manager Amix corp</h6>
+                                <div class="row text-center justify-content-md-center">
+                                    <div class="col-4"><a href="javascript:void(0)" class="link"><i class="mdi mdi-hospital"></i>Damage status <font class="font-medium">{{ instance.is_damaged }}</font></a></div>
+                                    <div class="col-4"><a href="javascript:void(0)" class="link"><i class="mdi mdi-hospital-marker"></i>Damage Level <font class="font-medium">{{ instance.damage_grade }}</font></a></div>
+                                </div>
+                                <div class="text-center m-t-30">
+                                    <a href="{% url 'pipelines:delete' instance.slug %}" class="btn waves-effect waves-light btn-danger hidden-md-down">Delete</a>
+                                </div>
+                            </center>
+                        </div>
+                    </div>
+                </div>
+                <!-- Column -->
+                <!-- Column -->
+                <div class="col-lg-8 col-xlg-9 col-md-7">
+                    <div class="card">
+                        <div class="card-block">
+                            <form method='POST' action="." enctype='multipart/form-data' class="form-horizontal form-material">{% csrf_token %}
+                                <div class="form-group">
+                                    <label class="col-md-12">Pipe Name</label>
+                                    <div class="col-md-12">
+                                        {{ form.name }}
+                                        <!-- <input type="text" placeholder="lokoja_pipeline" class="form-control form-control-line"> -->
+                                    </div>
+                                    {% if form.name.errors %}
+                                        <div class="alert alert-danger" role="alert">
+                                          {{ form.name.errors }}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-12">Longitude</label>
+                                    <div class="col-md-12">
+                                        {{ form.longitude }}
+                                       <!--  <input type="text" placeholder="-94.420307" class="form-control form-control-line"> -->
+                                    </div>
+                                    {% if form.longitude.errors %}
+                                        <div class="alert alert-danger" role="alert">
+                                          {{ form.longitude.errors }}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-12">Latitude</label>
+                                    <div class="col-md-12">
+                                        {{ form.latitude }}
+                                    </div>
+                                    {% if form.latitude.errors %}
+                                        <div class="alert alert-danger" role="alert">
+                                          {{ form.latitude.errors }}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-12">Damage status</label>
+                                    <div class="col-md-12">
+                                        {% for radio in form.is_damaged %}
+                                            {{ radio.tag }}
+                                            <label class="form-check-label" for="{{ radio.id_for_label }}">
+                                                {{ radio.choice_label }}
+                                            </label>
+                                        {% endfor %}
+                                    </div>
+                                    {% if form.is_damaged.errors %}
+                                        <div class="alert alert-danger" role="alert">
+                                          {{ form.is_damaged.errors }}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-12">Select Damage Level</label>
+                                    <div class="col-sm-12">
+                                        {{ form.damage_grade }}
+                                    </div>
+                                    {% if form.damage_grade.errors %}
+                                        <div class="alert alert-danger" role="alert">
+                                          {{ form.damage_grade.errors }}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                                
+                                
+                                <button class="btn btn-lg btn-primary btn-block" type="submit">Update</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- Column -->
+            </div>
+            <!-- Row -->
+            <!-- ============================================================== -->
+            <!-- End PAge Content -->
+            <!-- ============================================================== -->
+
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Container fluid  -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- footer -->
+        <!-- ============================================================== -->
+        <!-- <footer class="footer"> © 2017 Material Pro Admin by wrappixel.com </footer> -->
+        <!-- ============================================================== -->
+        <!-- End footer -->
+        <!-- ============================================================== -->
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Page wrapper  -->
+    <!-- ============================================================== -->
+
+{% endblock %}

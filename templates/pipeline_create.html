@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block style %}
+    <link href="{% static 'css/floating-labels.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    <!-- ============================================================== -->
+    <!-- End Topbar header -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Left Sidebar - style you can find in sidebar.scss  -->
+    <!-- ============================================================== -->
+    {% include 'sidebar.html' %}
+    <!-- ============================================================== -->
+    <!-- End Left Sidebar - style you can find in sidebar.scss  -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Page wrapper  -->
+    <!-- ============================================================== -->
+    <div class="page-wrapper">
+        <!-- ============================================================== -->
+        <!-- Container fluid  -->
+        <!-- ============================================================== -->
+        <div class="container-fluid">
+            <!-- ============================================================== -->
+            <!-- Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <div class="row page-titles">
+                <div class="col-md-5 col-8 align-self-center">
+                    <h3 class="text-themecolor">Dashboard</h3>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+                        <li class="breadcrumb-item active">Dashboard</li>
+                    </ol>
+                </div>
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- Start Page Content -->
+            <!-- ============================================================== -->
+            <!-- Row -->
+            <div class="row">
+                    <!-- column -->
+                    <div class="col-lg-12">
+                        <div class="card">
+                          <div class="card-block">
+                            <div class="col-sm-6 offset-3">
+                              <form method='POST' action="." enctype='multipart/form-data' class="form-signin">{% csrf_token %}             
+                                <div class="text-center mb-4">
+                                  <img class="mb-4" src="{% static 'img/logo1.jpg' %}" alt="" width="72" height="72">
+                                  <h1 class="h3 mb-3 font-weight-normal">Pipelines</h1>
+                                  <p>Install a new pipeline by providing the necessary details below.</p>
+                                </div>
+                                
+
+                                <div class="form-label-group">
+                                  <!-- <input type="text" id="inputName" class="form-control" placeholder="Pipeline Name" required autofocus> -->
+                                  {{ form.name }}
+                                  {% if form.name.errors %}
+                                    <div class="alert alert-danger" role="alert">
+                                      {{ form.name.errors }}
+                                    </div>
+                                  {% endif %}
+                                  <label for="inputName">Name</label>
+                                </div>
+                                <div class="form-label-group">
+                                  {{ form.longitude }}
+                                  {% if form.longitude.errors %}
+                                    <div class="alert alert-danger" role="alert">
+                                      {{ form.longitude.errors }}
+                                    </div>
+                                  {% endif %}
+                                  <label for="inputLongitude">Longitude</label>
+                                </div>
+                                <div class="form-label-group">
+                                  {{ form.latitude }}
+                                  {% if form.latitude.errors %}
+                                    <div class="alert alert-danger" role="alert">
+                                      {{ form.latitude.errors }}
+                                    </div>
+                                  {% endif %}
+                                  <label for="inputLatitude">Latitude</label>
+                                </div>
+                                <div class="custom-file">
+                                  {{ form.image }}
+                                  {% if form.image.errors %}
+                                    <div class="alert alert-danger" role="alert">
+                                      {{ form.image.errors }}
+                                    </div>
+                                  {% endif %}
+                                </div>
+                                <button class="btn btn-lg btn-primary btn-block" type="submit">Create</button>
+                                <p class="mt-5 mb-3 text-muted text-center">&copy; 2017-2018</p>
+                              </form>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ============================================================== -->
+                <!-- End PAge Content -->
+                <!-- ============================================================== -->
+        </div>
+        
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Page wrapper  -->
+    <!-- ============================================================== -->
+
+{% endblock %}
+
